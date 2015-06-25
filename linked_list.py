@@ -59,13 +59,21 @@ class LinkedList(object):
     def display(self):
         """display() will print the list represented as a Python
         tuple literal: "(12, 'sam', 37, 'tango')" """
+        # cur = self.head
+        # tup = (cur.val,)
+        # cur = cur.next
+        # while cur is not None:
+        #     tup = tup + (cur.val,)
+        #     cur = cur.next
+        # return tup
+
         cur = self.head
-        tup = (cur.val,)
+        tup = repr(cur.val)
         cur = cur.next
         while cur is not None:
-            tup = tup + (cur.val,)
+            tup = tup + ", " + repr(cur.val)
             cur = cur.next
-        return tup
+        return "(" + tup + ")"
 
     def __repr__(self):
         return str(self.display())
