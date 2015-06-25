@@ -20,6 +20,7 @@ class LinkedList(object):
         temp.next = self.head
         self.head = temp
         self.length += 1
+        # self.head = Node(val, self.head)
 
     def pop(self):
         """pop() will pop the first value off the head of
