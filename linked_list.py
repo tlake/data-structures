@@ -48,10 +48,11 @@ class LinkedList(object):
         the list, wherever it might be (node must be an item in the list"""
         if self.head == node:
             return self.pop()
+        # maybe we dont' need these two variables.  Define one in terms of the other.
         cur = self.head.next
         prev = self.head
         while cur is not None:
-            if cur.val == node.val:
+            if cur == node:
                 prev.next = prev.next.next
             cur = cur.next
             prev = prev.next
