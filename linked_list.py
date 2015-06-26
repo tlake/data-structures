@@ -8,11 +8,12 @@ class Node(object):
 
 
 class LinkedList(object):
-    def __init__(self, itr):
+    def __init__(self, itr=None):
         self.head = None
         self.length = 0
-        for item in itr:
-            self.insert(item)
+        if itr is not None:
+            for item in itr:
+                self.insert(item)
 
     def insert(self, val):
         """insert(val) will insert the value 'val' at the head of the list"""
@@ -25,7 +26,7 @@ class LinkedList(object):
     def pop(self):
         """pop() will pop the first value off the head of
         the list and return it."""
-        to_delete = self.head
+        to_delete = self.head.val
         self.head = self.head.next
         self.length -= 1
         return to_delete
