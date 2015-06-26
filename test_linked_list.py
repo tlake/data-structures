@@ -43,4 +43,4 @@ def test_remove():
 
 def test_display():
     display1 = LinkedList([1, 2, 3]).display()
-    assert display1 == (3, 2, 1)
+    assert display1 == '(3, 2, 1)'
