@@ -55,15 +55,16 @@ class LinkedList(object):
         if self.head is node:
             self.head = self.head.next
         # Else, iterate through list
-        cur = self.head
-        while cur is not None:
-            if cur.next is node:
-                cur.next = cur.next.next
-                self.size -= 1
-                break
-            cur = cur.next
-        # if you get here, then node is not in the list, so throw an error
-        raise LookupError('Node is not in the list.')
+        else:
+            cur = self.head
+            while cur is not None:
+                if cur.next is node:
+                    cur.next = cur.next.next
+                    self.size -= 1
+                    return
+                cur = cur.next
+            # if you get here, then node is not in the list, so throw an error
+            raise LookupError('Node is not in the list.')
 
     def display(self):
         """display() will print the list represented as a Python
