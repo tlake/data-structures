@@ -19,12 +19,14 @@ class LinkedList(object):
 
     def insert(self, val):
         """insert(val) will insert the value 'val' at the head of the list"""
+
         self.head = Node(val, self.head)
         self.length += 1
 
     def pop(self):
         """pop() will pop the first value off the head of
         the list and return it."""
+
         to_delete = self.head.val
         self.head = self.head.next
         self.length -= 1
@@ -37,6 +39,7 @@ class LinkedList(object):
     def search(self, val):
         """search(val) will return the node containing
         'val' in the list, if present, else None"""
+
         cur = self.head
         while cur is not None:
             if cur.val == val:
@@ -47,34 +50,24 @@ class LinkedList(object):
     def remove(self, node):
         """remove(node) will remove the given node from
         the list, wherever it might be (node must be an item in the list)"""
-        if self.head == node:
-            self.pop()
-        # maybe we dont' need these two variables.  Define one in terms of the other.
-        cur = self.head.next
+
+        # Special case - remove first node
+        if self.head is node:
+            self.head = self.head.next
+        # Else, iterate through list
+        cur = self.head
         while cur is not None:
             if cur.next is node:
                 cur.next = cur.next.next
+                self.size -= 1
                 break
             cur = cur.next
-
-        # cur = self.head.next
-        # prev = self.head
-        # while cur is not None:
-        #     if cur == node:
-        #         prev.next = prev.next.next
-        #     cur = cur.next
-        #     prev = prev.next
+        # if you get here, then node is not in the list, so throw an error
+        raise LookupError('Node is not in the list.')
 
     def display(self):
         """display() will print the list represented as a Python
         tuple literal: "(12, 'sam', 37, 'tango')" """
-        # cur = self.head
-        # tup = (cur.val,)
-        # cur = cur.next
-        # while cur is not None:
-        #     tup = tup + (cur.val,)
-        #     cur = cur.next
-        # return tup
 
         cur = self.head
         tup = repr(cur.val)
