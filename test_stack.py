@@ -34,16 +34,10 @@ def test_push(create_stack):
     assert test_stack.group.head.val == 4
 
 
-def test_push_2(create_empty_stack):
+def test_push_to_empty_stack(create_empty_stack):
     test_stack = create_empty_stack
     test_stack.push(1)
     assert test_stack.group.head.val == 1
-
-
-def test_none(create_empty_stack):
-    test_stack = create_empty_stack
-    test_stack.push(2)
-    assert test_stack.group.head.val == 2
 
 
 def test_pop_3(create_empty_stack):
