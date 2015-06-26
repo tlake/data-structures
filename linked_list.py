@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 
 
 class Node(object):
-    def __init__(self, val):
+    def __init__(self, val, next=None):
         self.val = val
-        self.next = None
+        self.next = next
 
 
 class LinkedList(object):
@@ -19,11 +19,8 @@ class LinkedList(object):
 
     def insert(self, val):
         """insert(val) will insert the value 'val' at the head of the list"""
-        temp = Node(val)
-        temp.next = self.head
-        self.head = temp
+        self.head = Node(val, self.head)
         self.length += 1
-        # self.head = Node(val, self.head)
 
     def pop(self):
         """pop() will pop the first value off the head of
