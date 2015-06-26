@@ -46,17 +46,24 @@ class LinkedList(object):
 
     def remove(self, node):
         """remove(node) will remove the given node from
-        the list, wherever it might be (node must be an item in the list"""
+        the list, wherever it might be (node must be an item in the list)"""
         if self.head == node:
-            return self.pop()
+            self.pop()
         # maybe we dont' need these two variables.  Define one in terms of the other.
         cur = self.head.next
-        prev = self.head
         while cur is not None:
-            if cur == node:
-                prev.next = prev.next.next
+            if cur.next is node:
+                cur.next = cur.next.next
+                break
             cur = cur.next
-            prev = prev.next
+
+        # cur = self.head.next
+        # prev = self.head
+        # while cur is not None:
+        #     if cur == node:
+        #         prev.next = prev.next.next
+        #     cur = cur.next
+        #     prev = prev.next
 
     def display(self):
         """display() will print the list represented as a Python
