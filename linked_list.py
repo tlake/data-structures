@@ -67,16 +67,13 @@ class LinkedList(object):
             raise LookupError('Node is not in the list.')
 
     def display(self):
-        """display() will print the list represented as a Python
-        tuple literal: "(12, 'sam', 37, 'tango')" """
-
         cur = self.head
-        tup = repr(cur.val)
-        cur = cur.next
-        while cur is not None:
-            tup = tup + ", " + repr(cur.val)
+        out = ""
+        while cur:
+            out += "{}, ".format(cur.val)
             cur = cur.next
-        return "(" + tup + ")"
+        out = "({})".format(out.rstrip(', '))
+        return out
 
     def __repr__(self):
         return str(self.display())
