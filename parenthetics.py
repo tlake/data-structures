@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 
 def parenthetics(str, symbol='()'):
-    print "d"
     open_symbol, closed_symbol = symbol
     open_count, closed_count = 0, 0
     for char in str:
