@@ -61,7 +61,6 @@ class LinkedList(object):
                 if cur.next is node:
                     cur.next = cur.next.next
                     self.size -= 1
-                    return
                 cur = cur.next
             # if you get here, then node is not in the list, so throw an error
             raise LookupError('Node is not in the list.')
