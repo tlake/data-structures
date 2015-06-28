@@ -1,15 +1,15 @@
 # data-structures
 Authors: Megan Slater, Tanner Lake, Tyler Peek
-
 Summary:
 A repository to hold sample code for a number of classic data structures implemented in Python.
-
 
 Linked List:
 A singly linked list. Contains a Node class that holds a variable and a pointer to the next Node. Methods: __init__, __repr__, __str__, insert, pop, size, search, remove, display
 
+
 Stack:
 A Last In, First Out(LIFO) structure.  Contains a LinkedList that keeps track of the objects passed in. Methods: push, pop
+
 
 Parethetics:
 A function that takes in a string and:
