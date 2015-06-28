@@ -1,24 +1,26 @@
 #!/usr/bin/env python
 
 
+<<<<<<< HEAD
 def parenthetics2(str):
     parens = []
     for item in str:
         parens.append(item)
+=======
+def parenthetics(str, symbol="()"):
+    open_symbol, closed_symbol = symbol
+>>>>>>> 4a66c7df490e553fa0100f677fcd45e697c4f4bc
     count = 0
-    open_parens = []
     for item in str:
-        count += 1
-        if item == "(":
-            open_parens.append(count)
-    count_two = 0
-    closed_parens = []
-    for item in str:
-        count_two += 1
-        if item == ")":
-            closed_parens.append(count_two)
-    if len(closed_parens) < len(open_parens):
+        if item == open_symbol:
+            count += 1
+        elif item == closed_symbol:
+            count -= 1
+    if count < 0:
+        return -1
+    if count > 0:
         return 1
+<<<<<<< HEAD
     count_final = 0
     for number in range(len(open_parens) + 1):
         if open_parens[count_final] > closed_parens[count_final]:
@@ -43,5 +45,7 @@ def parenthetics(str, symbol='()'):
             return -1
     if open_count > closed_count:
         return 1
+=======
+>>>>>>> 4a66c7df490e553fa0100f677fcd45e697c4f4bc
     else:
         return 0
