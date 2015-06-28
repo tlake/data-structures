@@ -64,3 +64,8 @@ def test_remove_on_empty_error(create_empty_list, create_unpointed_node):
 def test_display(create_linked_list):
     display1 = create_linked_list.display()
     assert display1 == '(3, 2, 1)'
+
+
+def test_repr_is_display(create_linked_list):
+    a_list = create_linked_list
+    assert a_list.display() == repr(a_list)
