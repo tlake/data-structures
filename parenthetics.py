@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 
 
-def parenthetics(str, symbol='()'):
-    count = 0
+def parenthetics(str, symbol="()"):
     open_symbol, closed_symbol = symbol
+    count = 0
     for item in str:
-        if item == "open_symbol":
+        if item == open_symbol:
             count += 1
-        elif item == "closed_symbol":
+        elif item == closed_symbol:
             count -= 1
-        if count == -1:
-            return count
-    if count == 0:
-        return count
+    if count < 0:
+        return -1
     if count > 0:
         return 1
+    else:
+        return 0
