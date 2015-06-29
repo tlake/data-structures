@@ -18,7 +18,8 @@ A function that takes in a string and:
 	Return -1 if the string is "broken" (a closing parens has not been proceeded by one that opens) 
 It also takes an optional argument of a string of two characters. The first will act as an opening symbol and the second as a closing symbol.
 
-
+Queue:
+A First In, First Out(FIFO) structure.  Contains a LinkedList that keeps track of the objects passed in as well as the size.  Methods:  enqueue, dequeue, size
 
 
 ## Resources/Collaboration Used:
