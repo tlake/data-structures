@@ -26,11 +26,13 @@ class LinkedList(object):
     def pop(self):
         """pop() will pop the first value off the head of
         the list and return it."""
-
-        to_delete = self.head.val
-        self.head = self.head.next
-        self.length -= 1
-        return to_delete
+        try:
+            to_delete = self.head.val
+            self.head = self.head.next
+            self.length -= 1
+            return to_delete
+        except AttributeError:
+            return 0
 
     def size(self):
         """size() will return the length of the list"""
