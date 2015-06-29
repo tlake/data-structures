@@ -32,6 +32,21 @@ class LinkedList(object):
         self.length -= 1
         return to_delete
 
+    def dequeue(self):
+        """deletes and returns the last item in the list"""
+        if self.length == 1:
+            return self.pop()
+        try:
+            cur = self.head
+            while cur.next.next is not None:
+                cur = cur.next
+            to_delete = cur.next.val
+            cur.next = None
+            self.length -= 1
+            return to_delete
+        except AttributeError:
+            raise IndexError('Queue is empty')
+
     def size(self):
         """size() will return the length of the list"""
         return self.length
