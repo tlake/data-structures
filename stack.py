@@ -13,3 +13,6 @@ class Stack(object):
 
     def push(self, val):
         self.group.insert(val)
+
+    def size(self):
+        return self.group.size()
