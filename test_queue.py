@@ -53,3 +53,10 @@ def test_size(create_empty_queue, create_queue, create_single_item_queue):
     assert test_empty_queue.size() == 0
     assert test_create_queue.size() == 3
     assert test_create_single_item_queue.size() == 1
+
+
+def test_add_and_remove(create_empty_queue):
+    test_queue = create_empty_queue
+    test_queue.enqueue(4)
+    test_queue.dequeue()
+    assert test_queue.size() == 0
