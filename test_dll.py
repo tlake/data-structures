@@ -17,6 +17,9 @@ def test_dll_insert(create_dll):
 
 
 # append(val) will append the value 'val' at the tail of the list
+def test_dll_append(create_dll):
+    dll = create_dll.append('appenditure')
+    assert dll.tail.val == 'appenditure'
 
 
 # pop() will pop the first value off the head of the list and return it.
