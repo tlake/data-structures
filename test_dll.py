@@ -67,7 +67,7 @@ def test_dll_remove(create_dll):
     dll.append(testing_val)
 
     # insert new_head_val so that testing_val is not the head, but instead
-    # now occurs at the tail and at the second node of the list
+    # now occurs at the second node of the list (as well as the tail)
     dll.insert(new_head_val)
 
     # assert that we've done those things correctly
