@@ -84,3 +84,9 @@ def test_dll_remove(create_dll):
     assert dll.head.val == new_head_val
     assert dll.tail.val == testing_val
     assert dll.head.next.val != testing_val
+
+
+def test_dll_remove_not_found(create_dll):
+    with pytest.raises(LookupError):
+        dll = create_dll
+        dll.remove("this doesn't exist in the list")
