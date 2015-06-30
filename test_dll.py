@@ -16,19 +16,22 @@ def create_empty_dll():
 
 # insert(val) will insert the value 'val' at the head of the list
 def test_dll_insert(create_dll):
-    dll = create_dll.insert('insertion')
+    dll = create_dll
+    dll.insert('insertion')
     assert dll.head.val == 'insertion'
 
 
 def test_dll_insert_when_empty(create_empty_dll):
-    dll = create_empty_dll.insert('insertion')
+    dll = create_empty_dll
+    dll.insert('insertion')
     assert dll.head.val == 'insertion'
     assert dll.tail.val == 'insertion'
 
 
 # append(val) will append the value 'val' at the tail of the list
 def test_dll_append(create_dll):
-    dll = create_dll.append('appenditure')
+    dll = create_dll
+    dll.append('appenditure')
     assert dll.tail.val == 'appenditure'
 
 
