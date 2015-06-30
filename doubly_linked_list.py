@@ -43,29 +43,22 @@ class DoublyLinkedList(object):
         self.tail = new_node
         self.length += 1
 
-#     def pop(self):
-#         """pop() will pop the first value off the head of
-#         the list and return it."""
+    def pop(self):
+        """pop() will pop the first value off the head of
+        the list and return it."""
 
-#         to_delete = self.head.val
-#         self.head = self.head.next
-#         self.length -= 1
-#         return to_delete
+        to_delete = self.head.val
+        self.head = self.head.next
+        self.head.prev = None
+        self.length -= 1
+        return to_delete
 
-#     def dequeue(self):
-#         """deletes and returns the last item in the list"""
-#         if self.length == 1:
-#             return self.pop()
-#         try:
-#             cur = self.head
-#             while cur.next.next is not None:
-#                 cur = cur.next
-#             to_delete = cur.next.val
-#             cur.next = None
-#             self.length -= 1
-#             return to_delete
-#         except AttributeError:
-#             raise IndexError('Queue is empty')
+    def shift(self):
+        to_delete = self.tail.val
+        self.tail = self.tail.prev
+        self.tail.next = None
+        self.length -= 1
+        return to_delete
 
 #     def size(self):
 #         """size() will return the length of the list"""
