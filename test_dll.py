@@ -23,6 +23,11 @@ def test_dll_append(create_dll):
 
 
 # pop() will pop the first value off the head of the list and return it.
+def test_dll_pop(create_dll):
+    dll = create_dll
+    head_val = dll.head.val
+    popped_val = dll.pop()
+    assert head_val == popped_val
 
 
 # shift() will remove the last value from the tail of the list and return it.
