@@ -64,16 +64,21 @@ class DoublyLinkedList(object):
 #         """size() will return the length of the list"""
 #         return self.length
 
-#     def search(self, val):
-#         """search(val) will return the node containing
-#         'val' in the list, if present, else None"""
+    def remove(self, val):
+        """will remove the first instance of 'val' found
+        in the list, starting from the head. if 'val'
+        is not present it will raise an appropriate Python
+        exception."""
+        cur = self.head
+        try:
+            while cur is not None:
+                if cur.val == val:
+                    cur.prev.next = cur.next
+                    cur.next.prev = cur.prev
+                cur = cur.next
+        except:
+            raise LookupError("Node is not in the list.")
 
-#         cur = self.head
-#         while cur is not None:
-#             if cur.val == val:
-#                 break
-#             cur = cur.next
-#         return cur
 
 #     def remove(self, node):
 #         """remove(node) will remove the given node from
