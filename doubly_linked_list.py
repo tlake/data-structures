@@ -22,13 +22,25 @@ class DoublyLinkedList(object):
     def insert(self, val):
         """insert(val) will insert the value 'val'
         at the head of the list"""
+        new_node = Node(val)
         if self.length == 0:
-            new_node = Node(val)
             self.tail = new_node
         else:
-            new_node = Node(val, self.head.next)
             self.head.prev = new_node
+            new_node.next = self.head
         self.head = new_node
+        self.length += 1
+
+    def append(self, val):
+        """append(val) will append the value 'val'
+        at the tail of the list"""
+        new_node = Node(val)
+        if self.length == 0:
+            self.head = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+        self.tail = new_node
         self.length += 1
 
 #     def pop(self):
@@ -98,8 +110,8 @@ class DoublyLinkedList(object):
 #         out = "({})".format(out.rstrip(', '))
 #         return out
 
-#     def __repr__(self):
-#         return str(self.display())
+# #     def __repr__(self):
+# #         return str(self.display())
 
 #     def __str__(self):
-#         return self.display()
+#         return "{}, {}, {}".format(self.head.val, self.head.next.val, self.tail.val)
