@@ -54,15 +54,14 @@ class DoublyLinkedList(object):
         return to_delete
 
     def shift(self):
+        """shift() will remove the last value
+        from the tail of the list and return it.
+        """
         to_delete = self.tail.val
         self.tail = self.tail.prev
         self.tail.next = None
         self.length -= 1
         return to_delete
-
-#     def size(self):
-#         """size() will return the length of the list"""
-#         return self.length
 
     def remove(self, val):
         """will remove the first instance of 'val' found
@@ -70,46 +69,11 @@ class DoublyLinkedList(object):
         is not present it will raise an appropriate Python
         exception."""
         cur = self.head
-        try:
-            while cur is not None:
-                if cur.val == val:
-                    cur.prev.next = cur.next
-                    cur.next.prev = cur.prev
-                cur = cur.next
-        except:
-            raise LookupError("Node is not in the list.")
-
-
-#     def remove(self, node):
-#         """remove(node) will remove the given node from
-#         the list, wherever it might be (node must be an item in the list)"""
-
-#         # Special case - remove first node
-#         if self.head is node:
-#             self.head = self.head.next
-#         # Else, iterate through list
-#         else:
-#             cur = self.head
-#             while cur is not None:
-#                 if cur.next is node:
-#                     cur.next = cur.next.next
-#                     self.size -= 1
-#                 cur = cur.next
-#             # if you get here, then node is not in the
-# list, so throw an error
-#             raise LookupError('Node is not in the list.')
-
-#     def display(self):
-#         cur = self.head
-#         out = ""
-#         while cur:
-#             out += "{}, ".format(cur.val)
-#             cur = cur.next
-#         out = "({})".format(out.rstrip(', '))
-#         return out
-
-# #     def __repr__(self):
-# #         return str(self.display())
-
-#     def __str__(self):
-#         return "{}, {}, {}".format(self.head.val, self.head.next.val, self.tail.val)
+        while cur is not None:
+            if cur.val == val:
+                cur.prev.next = cur.next
+                cur.next.prev = cur.prev
+                self.length -= 1
+                return
+            cur = cur.next
+        raise LookupError("The value is not in the list.")
