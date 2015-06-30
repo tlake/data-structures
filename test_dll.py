@@ -31,6 +31,11 @@ def test_dll_pop(create_dll):
 
 
 # shift() will remove the last value from the tail of the list and return it.
+def test_dll_shift(create_dll):
+    dll = create_dll
+    tail_val = dll.tail.val
+    shifted_val = dll.shift()
+    assert tail_val == shifted_val
 
 
 # remove(val) will remove the first instance of 'val' found in the list,
