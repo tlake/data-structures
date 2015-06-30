@@ -54,3 +54,33 @@ def test_dll_shift(create_dll):
 # remove(val) will remove the first instance of 'val' found in the list,
 # starting from the head. If 'val' is not present, it will raise an
 # appropriate Python exception.
+def test_dll_remove(create_dll):
+    dll = create_dll
+
+    # create the values we'll be using
+    testing_val = 4
+    new_head_val = 5
+
+    # insert and append testing_val so that head.val and tail.val
+    # are the same
+    dll.insert(testing_val)
+    dll.append(testing_val)
+
+    # insert new_head_val so that testing_val is not the head, but instead
+    # now occurs at the second node of the list (as well as the tail)
+    dll.insert(new_head_val)
+
+    # assert that we've done those things correctly
+    assert dll.head.next.val == testing_val
+    assert dll.tail.val == testing_val
+
+    # call .remove() with testing_val, which ought to remove the second
+    # node, but leave the tail node as is
+    dll.remove(testing_val)
+
+    # assert that the head node is unchanged, that the second node's value
+    # is no longer the same as testing_value, and that the tail node's value
+    # *IS* still the same as testing_value
+    assert dll.head.val == new_head_val
+    assert dll.tail.val == testing_val
+    assert dll.head.next.val != testing_val
