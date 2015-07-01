@@ -13,9 +13,8 @@ class BinaryHeap(object):
 
     def push(self, val):
         self.heap.append(val)
-        self.swap(0, self.size - 1)
-        self.max_heapify(0)
         self.size += 1
+        #  do fun stuff
 
     def pop(self):
         tmp = self.heap[0]
