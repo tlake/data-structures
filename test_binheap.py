@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from binheap import Binheap
+from bin_heap import BinaryHeap
 import pytest
 
 
 @pytest.fixture()
 def create_binheap():
-    return Binheap([5, 13, 2, 85, 106, 42, 3, 25])
+    return BinaryHeap([5, 13, 2, 85, 106, 42, 3, 25])
 
 
 @pytest.fixture()
 def create_empty_binheap():
-    return Binheap([])
+    return BinaryHeap([])
 
 
 # push(val) will insert the value 'val' in the appropriate place
