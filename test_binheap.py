@@ -18,22 +18,22 @@ def create_empty_binheap():
 def test_binheap_push(create_binheap):
     binheap = create_binheap
     binheap.push(125)
-    assert binheap[0] == 125
+    assert binheap.heap[0] == 125
     binheap.push(4)
-    assert binheap[0] == 125
+    assert binheap.heap[0] == 125
 
 
 def test_binheap_push_when_empty(create_empty_binheap):
     binheap = create_empty_binheap
     binheap.push(125)
-    assert binheap[0] == 125
+    assert binheap.heap[0] == 125
 
 
 # pop(val) will pop the value 'val' from the top
 def test_binheap_pop(create_binheap):
     binheap = create_binheap
     binheap.pop()
-    assert binheap[0] == 85
+    assert binheap.heap[0] == 85
 
 
 def test_binheap_pop_when_empty(create_empty_binheap):
