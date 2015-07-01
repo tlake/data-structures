@@ -11,9 +11,11 @@ class BinaryHeap(object):
             for val in itr:
                 pass
 
-    def insert(self, val):
+    def push(self, val):
         self.heap.append(val)
+        self.max_heapify
         self.size += 1
+
 
     def max_heapify(self, index):
         #  a nodes child nodes are going to be at index
@@ -21,8 +23,8 @@ class BinaryHeap(object):
         #  So you have to add 1 to the index passed in, do
         #  the math, then subtact 1 to get back at the actual
         #  indexes.
-        left = 2 * (index + 1) - 1
-        right = 2 * (index + 1)
+        left = 2 * index + 1
+        right = 2 * index + 2
         largest = index
         #  make sure left is not out of bounds, then
         #  make sure left is not bigger than the biggest node
