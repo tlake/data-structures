@@ -42,10 +42,10 @@ class BinaryHeap(object):
         #  make sure left is not out of bounds, then
         #  make sure left is not bigger than the biggest node
         if left < self.size and self.heap[left] > self.heap[largest]:
-            largest = right
+            largest = left
         #  make sure right is not bigger than the biggest node
         if right < self.size and self.heap[right] > self.heap[largest]:
-            largest = left
+            largest = right
         #  make the swap
         if largest != index:
             self.swap(index, largest)
