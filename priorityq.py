@@ -42,14 +42,6 @@ class PriorityQueue(object):
         self.heap[c_index] = temp
         return p_index, c_index
 
-    def compare(self, p_index, c_index):
-        pass
-    #   if heap[p_index].pri < heap[c_index].pri:
-    #     swap
-    # elif p_pri == c_pri:
-    #     if p_ord > c_ord:
-    #         swap
-
     def heapify_up(self, child):
         if child != 0:
             parent = (child - 1) // 2
@@ -69,19 +61,21 @@ class PriorityQueue(object):
         right_child_index = 2 * index + 2
         right_child_node = self.heap[right_child_index]
         index_of_largest = index
-        largest_node = self.heap[index_of_largest]
         #  make sure left is not out of bounds
         #  then make sure left is not bigger than the biggest node
         if left_child_index < len(self.heap):
-            if left_child_node.priority > right_child_node.priority:
+            if left_child_node.priority > parent_node.priority:
                 index_of_largest = left_child_index
-            elif left_child_node.priority == right_child_node.priority:
-                if left_child_node.order > parent_node.order:
+            elif left_child_node.priority == parent_node.priority:
+                if left_child_node.order < parent_node.order:
                     index_of_largest = left_child_index
         #  make sure right is not bigger than the biggest node
-        elif right_child_index < len(self.heap):
-            if right_child_node.priority > largest_node.priority:
+        if right_child_index < len(self.heap):
+            if right_child_node.priority > self.heap[index_of_largest].priority:
                 index_of_largest = right_child_index
+            elif right_child_node.priority == self.heap[index_of_largest].priority:
+                if right_child_node.order < self.heap[index_of_largest].order:
+                    index_of_largest = right_child_index
         #  make the swap
         if index_of_largest != index:
             self.swap(index, index_of_largest)
