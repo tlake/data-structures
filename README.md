@@ -15,7 +15,7 @@ Contains a Node class that holds a variable and two pointers: one to the previou
 
 ### Stack:
 A Last In, First Out(LIFO) structure.  Contains a LinkedList that keeps track of the objects passed in.
-Methods: push, pop
+**Methods:** push, pop
 
 ### Parethetics:
 A function that takes in a string and:
