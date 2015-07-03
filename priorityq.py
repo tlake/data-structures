@@ -10,6 +10,8 @@ class Node(object):
 
 
 class PriorityQueue(object):
+    """Creates a Priority Queue. If a list of tuples is sent in,
+    they are each unpacked and sent to the insert method."""
     def __init__(self, itr=None):
         self.insertion_order = 0
         self.heap = []
@@ -27,7 +29,8 @@ class PriorityQueue(object):
         self.heapify_up(len(self.heap) - 1)
 
     def pop(self):
-        """Removes the highest-priority and first-inserted item
+        """Removes the Node with the highest-priority and returns its values.
+        If there is more than one
         from the PriorityQueue."""
         tmp = self.heap[0].value
         if len(self.heap) > 1:
