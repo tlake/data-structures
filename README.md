@@ -1,5 +1,7 @@
 # data-structures
 
+[![Travis](https://travis-ci.org/tlake/data-structures.svg)](https://travis-ci.org/tlake/data-structures.svg)
+
 Authors:
 
 - [Megan Slater](https://github.com/meslater1030)
@@ -64,5 +66,3 @@ Visual assistance provided by [BinaryTreeVisualiser](http://btv.melezinek.cz/bin
 Contains a Node that holds variable, order and priority values.  Also contains a Priority Queue class that organizes Nodes in a binary heap so that node returned is the node with that highest priority that was added first.
 
 **Methods:**  insert, pop, peek
-
-[![Travis](https://travis-ci.org/tlake/data-structures.svg)](https://travis-ci.org/tlake/data-structures.svg)
