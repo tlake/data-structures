@@ -29,9 +29,13 @@ class PriorityQueue(object):
     def pop(self):
         """Removes the highest-priority and first-inserted item
         from the PriorityQueue."""
-        tmp = self.heap[0]
-        self.heap[0] = self.heap.pop()
-        self.heapify_down(0)
+        tmp = self.heap[0].value
+        if len(self.heap) > 1:
+            self.heap[0] = self.heap.pop()
+            self.heapify_down(0)
+        else:
+            self.heap = []
+            self.order = 0
         return tmp
 
     # .peek(): returns the most important item without removing it from

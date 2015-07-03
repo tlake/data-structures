@@ -6,23 +6,7 @@ import pytest
 
 @pytest.fixture()
 def create_pq():
-    """Creates a priotity queue with an arbitrary list of numbers to use
-    for further testing.
-    """
-    pq = PriorityQueue([(5, "Tanner"),
-                        (1, "Tyler"),
-                        (4, "Megan"),
-                        (1, "Jason"),
-                        (3, "Cris"),
-                        (1, "Grace"),
-                        (2, "Karen"),
-                        (1, "Wesley")])
-    return pq
-
-
-@pytest.fixture()
-def create_pq2():
-    """Creates a priotity queue with an arbitrary list of numbers to use
+    """Creates a priotity queue, then inserts priorities and values to use
     for further testing.
     """
     pq = PriorityQueue()
@@ -37,19 +21,10 @@ def create_pq2():
     return pq
 
 
-@pytest.fixture()
-def create_empty_pq():
-    """Creates an empty priotity queue"""
-    pq = PriorityQueue()
-    return pq
-
-#
-#  Test Insert
-#
-def test_pq_insert1(create_pq2):
+def test_pq_insert1(create_pq):
     """Insures that insert inserts the value in the appropriate place
     """
-    pq = create_pq2
+    pq = create_pq
     #  If you add an item with the highest priority,
     #  It will always be at the top of the list.
     pq.insert(101, "Test1")
@@ -61,16 +36,18 @@ def test_pq_insert1(create_pq2):
 
     #  If you add an item with the lowest priority,
     #  It will always be at the bottom of the list.
-    pq.insert(104, "Test4")
-    assert pq.heap[0].value == "Test4"
-    pq.insert(105, "Test5")
-    assert pq.heap[0].value == "Test5"
-    pq.insert(106, "Test6")
-    assert pq.heap[0].value == "Test6"
+    #  AKA heapify up will never do anything.
+    pq.insert(-1, "Test4")
+    assert pq.heap[len(pq.heap)-1].value == "Test4"
+    pq.insert(-2, "Test5")
+    assert pq.heap[len(pq.heap)-1].value == "Test5"
+    pq.insert(-3, "Test6")
+    assert pq.heap[len(pq.heap)-1].value == "Test6"
 
 
 def test_pq_insert2():
-    """
+    """Test that inserting into a priority queue
+    behaves as expected.
     """
     pq = PriorityQueue()
     pq.insert(1, "We")
@@ -91,52 +68,54 @@ def test_pq_insert2():
     assert pq.heap[0].value == "friends"
 
 
-def test_pq_length(create_pq, create_empty_pq):
-    """Makes sure that all the values are being added to the
-    priotity queue.
+def test_pq_length(create_pq):
+    """Makes sure that the size is correct after adding
+    to the priotity queue.
     """
-    pq = create_empty_pq
+    pq = PriorityQueue()
     assert len(pq.heap) == 0
     pq = create_pq
     assert len(pq.heap) == 8
 
 
-def test_pq_pop(create_pq2):
+def test_pq_pop(create_pq):
     """pop(val) will pop the value from the top and rearrange
     all other values to maintain the priority queue/max heap property
     """
-    pq = create_pq2
-    assert pq.heap[0].value == "friends"
-    pq.pop()
-    assert pq.heap[0].value == "champions"
-    pq.pop()
-    assert pq.heap[0].value == "are"
-    pq.pop()
-    assert pq.heap[0].value == "eee"
-    pq.pop()
-    assert pq.heap[0].value == "We"
-    pq.pop()
-    assert pq.heap[0].value == "eee"
-    pq.pop()
-    assert pq.heap[0].value == "the"
-    pq.pop()
-    assert pq.heap[0].value == "my"
+    pq = create_pq
+    assert pq.pop() == "friends"
+    assert pq.pop() == "champions"
+    assert pq.pop() == "are"
+    assert pq.pop() == "eee"
+    assert pq.pop() == "We"
+    assert pq.pop() == "eee"
+    assert pq.pop() == "the"
+    assert pq.pop() == "my"
+
+
+def test_pop_single(create_pq):
+    pq = PriorityQueue()
+    pq.insert(1, "Almost missed this")
+    assert pq.pop() == "Almost missed this"
 
 
 def test_pq_pop_when_empty():
     """Ensures that an exception is raised when trying
-    to pop() from an empty heap.
+    to pop() from an empty priority heap.
     """
     pq = PriorityQueue()
     with pytest.raises(IndexError):
         pq.pop()
 
 
-def test_peek(create_pq2):
+def test_peek(create_pq):
+    """Ensures that peek raises an error when the priority queue
+    is empty, and that it returns the right value when items are added.
+    """
     pq = PriorityQueue()
     with pytest.raises(IndexError):
         pq.peek()
-    pq = create_pq2
+    pq = create_pq
     pq.insert(100, "This is so much fun!")
     assert pq.peek() == "This is so much fun!"
     assert pq.peek() != "This sucks"
