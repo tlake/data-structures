@@ -52,12 +52,14 @@ class PriorityQueue(object):
     def heapify_up(self, child_index):
         if child_index != 0:
             parent_index = (child_index - 1) >> 1
-            if self.heap[parent_index].priority < self.heap[child_index].priority:
+            if (self.heap[parent_index].priority <
+               self.heap[child_index].priority):
                 self.swap(child_index, parent_index)
                 self.heapify_up(parent_index)
-            elif self.heap[parent_index].priority == self.heap[child_index].priority:
-                if self.heap[parent_index].order > self.heap[child_index].order:
-                    self.swap(child_index, parent_index)
+            elif (self.heap[parent_index].priority ==
+                  self.heap[child_index].priority):
+                if (self.heap[parent_index].order >
+                   self.heap[child_index].order):
                     self.heapify_up(parent_index)
 
     def heapify_down(self, p_index):
@@ -66,40 +68,21 @@ class PriorityQueue(object):
         largest_index = p_index
 
         if lc_index < len(self.heap):
-            if self.heap[largest_index].priority < self.heap[lc_index].priority:
+            if (self.heap[largest_index].priority <
+               self.heap[lc_index].priority):
                 largest_index = lc_index
-            elif self.heap[largest_index].priority == self.heap[lc_index].priority:
+            elif (self.heap[largest_index].priority ==
+                  self.heap[lc_index].priority):
                 if self.heap[largest_index].order > self.heap[lc_index].order:
                     largest_index = lc_index
         if rc_index < len(self.heap):
-            if self.heap[largest_index].priority < self.heap[rc_index].priority:
+            if (self.heap[largest_index].priority <
+               self.heap[rc_index].priority):
                 largest_index = rc_index
-            elif self.heap[largest_index].priority == self.heap[rc_index].priority:
+            elif (self.heap[largest_index].priority ==
+                  self.heap[rc_index].priority):
                 if self.heap[largest_index].order > self.heap[rc_index].order:
                     largest_index = rc_index
         if largest_index != p_index:
             self.swap(p_index, largest_index)
             self.heapify_down(largest_index)
-
-
-"""
-    if p_pri < c_pri:
-        swap
-    elif p_pri == c_pri:
-        if p_ord > c_ord:
-            swap
-    Given:
-        Node
-            pri
-            ord
-            val
-        incrementing insertion counter
-        Rule1: p_pri > c_pri
-        Rule2: Given Rule1: p_ord < c_ord
-
-    if p_pri < c_pri:
-        swap
-    elif p_pri == c_pri:
-        if p_ord > c_ord:
-            swap
-"""
