@@ -22,16 +22,16 @@ class PriorityQueue(object):
 
     def insert(self, priority, value):
         """Creates a Node with the given priority and value, and
-        inserts it into the PriorityQueue."""
+        inserts it into the Priority Queue."""
         self.insertion_order += 1
         node = Node(priority, self.insertion_order, value)
         self.heap.append(node)
         self.heapify_up(len(self.heap) - 1)
 
     def pop(self):
-        """Removes the Node with the highest-priority and returns its values.
-        If there is more than one
-        from the PriorityQueue."""
+        """Removes the Node with the highest-priority and returns its value.
+        If there is more than one Node with the same priority, the one that
+        was inserted first will always be the one returned."""
         tmp = self.heap[0].value
         if len(self.heap) > 1:
             self.heap[0] = self.heap.pop()
@@ -41,18 +41,21 @@ class PriorityQueue(object):
             self.order = 0
         return tmp
 
-    # .peek(): returns the most important item without removing it from
-    # the queue.
     def peek(self):
+        """Returns the most important item without removing it from
+        the queue."""
         return self.heap[0].value
 
     def swap(self, p_index, c_index):
-        """Swaps the node at p_index with the node at c_index."""
+        """Swaps the parent node with the child node."""
         temp = self.heap[p_index]
         self.heap[p_index] = self.heap[c_index]
         self.heap[c_index] = temp
 
     def heapify_up(self, child_index):
+        """Moves a newly inserted node up the heap by comparing it to
+        its parent and swapping it if its priority is greater or if its
+        priority is the same but its order is less."""
         if child_index != 0:
             parent_index = (child_index - 1) >> 1
             if (self.heap[parent_index].priority <
@@ -66,6 +69,9 @@ class PriorityQueue(object):
                     self.heapify_up(parent_index)
 
     def heapify_down(self, p_index):
+        """Moves the Node that replaced the top down down the heap by
+        comparing it to its parent and swapping it if its priority is less
+        or if its priority is the same but its order is greater."""
         lc_index = 2 * p_index + 1
         rc_index = 2 * p_index + 2
         largest_index = p_index
