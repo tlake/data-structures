@@ -62,9 +62,11 @@ def test_del_node(create_graph):
     is raised if the node is not there.
     """
     graph = create_graph
+    graph.add_edge(2, 1)
     graph.del_node(1)
     assert 1 not in graph.nodes()
     assert (1, 2) not in graph.edges()
+    assert (2, 1) not in graph.edges()
     with pytest.raises(IndexError):
         graph.del_node(7)
 
