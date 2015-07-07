@@ -30,26 +30,35 @@ class Graph(object):
         """Adds a new edge to the graph connecting node1 to node2.
         If either node1 or node2 are not already present in the
         graph, they are added."""
-        pass
+        self.graph.setdefault(node1, []).append(node2)
 
     def del_node(self, node):
         """Deletes the node from the graph. Raises an error if no
         such node exists"""
-        pass
+        if node in self.graph.keys():
+            del(self.graph[node])
+        else:
+            raise IndexError("Node not in graph")
 
     def del_edge(self, node1, node2):
         """Deletes the edge connecting node1 and node2 from the graph.
         Raises an error if no such edge exists."""
-        pass
+        self.graph[node1].remove(node2)
 
     def has_node(self, node):
         """True if node is in the graph, False if it is not."""
-        pass
+        if node in self.graph.keys():
+            return True
+        else:
+            return False
 
     def neighbors(self, node):
         """Returns a list of all nodes connected to node by edges.
         Raises an error if node is not in the graph."""
-        pass
+        neighbors = []
+        for neighbor in self.graph[node]:
+            neighbors.append(neighbor)
+        return neighbor
 
     def adjacent(node1, node2):
         """Returns True if there is an edge connecting node1 and node2.
