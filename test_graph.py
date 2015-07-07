@@ -4,9 +4,12 @@ from __future__ import unicode_literals
 import pytest
 from graph import Graph
 
+
+@pytest.fixture()
 def create_graph():
     graph = Graph()
     return graph
+
 
 def test_nodes(create_graph):
     graph = create_graph

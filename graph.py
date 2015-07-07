@@ -13,9 +13,8 @@ class Graph(object):
 
     def edges(self):
         """Returns a list of all edges in the graph."""
-        nodes = self.nodes()
         edges = []
-        for node in nodes:
+        for node in self.nodes():
             edges.append(self.graph[node])
         return edges
 
@@ -28,6 +27,7 @@ class Graph(object):
         If either node1 or node2 are not already present in the
         graph, they are added."""
         self.graph.setdefault(node1, []).append(node2)
+        self.graph.setdefault(node2, [])
 
     def del_node(self, node):
         """Deletes the node from the graph. Raises an error if no
@@ -52,10 +52,7 @@ class Graph(object):
     def neighbors(self, node):
         """Returns a list of all nodes connected to node by edges.
         Raises an error if node is not in the graph."""
-        neighbors = []
-        for neighbor in self.graph[node]:
-            neighbors.append(neighbor)
-        return neighbor
+        return self.graph[node]
 
     def adjacent(self, node1, node2):
         """Returns True if there is an edge connecting node1 and node2.
