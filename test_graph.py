@@ -36,6 +36,8 @@ def test_add_node(create_graph):
     graph = create_graph
     graph.add_node(6)
     assert 6 in graph.nodes()
+    graph.add_node(7, [1, 2, 3, 4, 5, 6])
+    assert 7 in graph.nodes()
 
 
 def test_add_edge(create_graph):
