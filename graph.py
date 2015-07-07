@@ -14,8 +14,8 @@ class Graph(object):
     def edges(self):
         """Returns a list of all edges in the graph."""
         edges = []
-        for node in self.nodes():
-            edges.append(self.graph[node])
+        for item in self.graph.iteritems():
+            edges.append(item)
         return edges
 
     def add_node(self, new_node):
