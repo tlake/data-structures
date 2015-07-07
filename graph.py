@@ -21,9 +21,12 @@ class Graph(object):
 
     def add_node(self, new_node, neighbors=[]):
         """Adds a new node to the graph"""
-        self.graph[new_node] = []
-        for node in neighbors:
-            self.add_edge(new_node, node)
+        if new_node not in self.nodes():
+            self.graph[new_node] = []
+            for node in neighbors:
+                self.add_edge(new_node, node)
+        else:
+            raise ValueError("Node is already in the list.")
 
     def add_edge(self, node1, node2):
         """Adds a new edge to the graph connecting node1 to node2.
