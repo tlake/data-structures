@@ -104,4 +104,5 @@ def test_adjacent(create_graph):
     assert not graph.adjacent(2, 1)
     with pytest.raises(KeyError):
         graph.adjacent(6, 5)
+    with pytest.raises(KeyError):
         graph.adjacent(5, 6)
