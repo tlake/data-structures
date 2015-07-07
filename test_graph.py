@@ -78,16 +78,30 @@ def test_del_edge(create_graph):
 
 def test_has_node(create_graph):
     graph = create_graph
-    #  graph.has_node()#  not sure what we are passing in yet
+    assert not graph.has_node(8)
+    assert graph.has_node(2)
+    graph.add_node(177)
+    assert graph.has_node(177)
+    graph.del_node(2)
+    assert not graph.has_node(2)
 
 
 def test_neighbors(create_graph):
     graph = create_graph
-    #  we need to make/find a node here
-    #  graph.has_node()#  not sure what we are passing in yet
+    assert 2 in graph.neighbors(1)
+    assert 4 not in graph.neighbors(1)
+    graph.add_edge(1, 3)
+    graph.add_edge(1, 4)
+    assert 3 in graph.neighbors(1)
+    assert 4 in graph.neighbors(1)
+    graph.del_edge(1, 3)
+    assert 3 not in graph.neighbors(1)
 
 
 def test_adjacent(create_graph):
     graph = create_graph
-    #  we need to make/find 2 nodes here
-    # graph.adjacent(node1, node2)
+    assert graph.adjacent(1, 2)
+    assert not graph.adjacent(2, 1)
+    with pytest.raises(KeyError):
+        graph.adjacent(6, 5)
+        graph.adjacent(5, 6)
