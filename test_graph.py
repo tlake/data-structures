@@ -35,12 +35,13 @@ def test_edges(create_graph):
 
 def test_add_node(create_graph):
     graph = create_graph
-    #  graph.add_node()#  not sure what we are passing in yet
+    graph.add_node(6)
+    assert 7 in graph.nodes()
 
 
 def test_add_edge(create_graph):
     graph = create_graph
-    #  graph.add_edge()#  not sure what we are passing in yet
+    graph.add_edge(5, 1)
 
 
 def test_del_node(create_graph):
