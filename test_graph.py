@@ -28,14 +28,16 @@ def test_nodes(create_graph):
 
 def test_edges(create_graph):
     graph = create_graph
-    print graph.edges()
-    #  assert edges == ???
+    for edge in [(1, 2), (2, 3), (3, 4), (4, 5)]:
+        assert edge in graph.edges()
 
 
-# def test_add_node(create_graph):
-#     graph = create_graph
-#     graph.add_node(6)
-#     assert 7 in graph.nodes()
+def test_add_node(create_graph):
+    graph = create_graph
+    graph.add_node(6)
+    assert 6 in graph.nodes()
+    graph.add_node(7, [1, 2, 3, 4, 5, 6])
+    assert 7 in graph.nodes()
 
 
 def test_add_edge(create_graph):
