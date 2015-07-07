@@ -35,11 +35,14 @@ class Graph(object):
         self.graph.setdefault(node1, []).append(node2)
         self.graph.setdefault(node2, [])
 
-    def del_node(self, node):
+    def del_node(self, del_node):
         """Deletes the node from the graph. Raises an error if no
         such node exists"""
-        if node in self.graph.keys():
-            del(self.graph[node])
+        if del_node in self.graph.keys():
+            del(self.graph[del_node])
+            for node in self.graph.keys():
+                if del_node in self.graph[node]:
+                    self.graph[node].remove(del_node)
         else:
             raise IndexError("Node not in graph")
 
