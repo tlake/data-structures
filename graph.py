@@ -67,7 +67,13 @@ class Graph(object):
         """Returns True if there is an edge connecting node1 and node2.
         False if no such edge exists. Raises an error if either of the
         supplied nodes are not in the graph."""
+        if (node1 not in self.graph.iterkeys()
+           or node2 not in self.graph.iterkeys()):
+            raise KeyError
+
+        verdict = False
+
         if node2 in self.graph[node1]:
-            return True
-        else:
-            return False
+            verdict = True
+
+        return verdict
