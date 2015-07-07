@@ -84,6 +84,10 @@ def test_del_edge(create_graph):
 
 
 def test_has_node(create_graph):
+    """
+    .has_node() should return True if the node exists in the
+    graph, or return False if it does not exist in the graph.
+    """
     graph = create_graph
     assert not graph.has_node(8)
     assert graph.has_node(2)
@@ -94,6 +98,11 @@ def test_has_node(create_graph):
 
 
 def test_neighbors(create_graph):
+    """
+    .neighbors() should return a list of all nodes connected
+    by edges to the given node. It should raise an error if
+    the given node does not exist in the graph.
+    """
     graph = create_graph
     assert 2 in graph.neighbors(1)
     assert 4 not in graph.neighbors(1)
@@ -103,9 +112,17 @@ def test_neighbors(create_graph):
     assert 4 in graph.neighbors(1)
     graph.del_edge(1, 3)
     assert 3 not in graph.neighbors(1)
+    with pytest.raises(KeyError):
+        graph.neighbors(88)
 
 
 def test_adjacent(create_graph):
+    """
+    .adjacent() should return True if the first node is pointing
+    to the second node, or False if it is not. If either of the
+    given nodes do not exist in the graph, it should raise a
+    KeyError.
+    """
     graph = create_graph
     assert graph.adjacent(1, 2)
     assert not graph.adjacent(2, 1)
