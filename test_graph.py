@@ -8,18 +8,28 @@ from graph import Graph
 @pytest.fixture()
 def create_graph():
     graph = Graph()
+    graph.add_node(1)
+    graph.add_node(2)
+    graph.add_node(3)
+    graph.add_node(4)
+    graph.add_node(5)
+    graph.add_edge(1, 2)
+    graph.add_edge(2, 3)
+    graph.add_edge(3, 4)
+    graph.add_edge(4, 5)
     return graph
 
 
 def test_nodes(create_graph):
     graph = create_graph
-    nodes = graph.nodes()
-    #  assert nodes == [1, 2, 3, 4, 5]
+    for node in [1, 2, 3, 4, 5]:
+        assert node in graph.nodes()
 
 
 def test_edges(create_graph):
     graph = create_graph
-    edges = graph.edges()
+    for node in graph.nodes():
+        pass
     #  assert edges == ???
 
 
