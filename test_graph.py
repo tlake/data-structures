@@ -58,12 +58,15 @@ def test_add_edge(create_graph):
 def test_del_node(create_graph):
     """deletes an existing node and asserts that the node is
     no longer there and that its associated edges are also
-    no longer there
+    no longer there.  Also makes sure the appropriate error
+    is raised if the node is not there.
     """
     graph = create_graph
     graph.del_node(1)
     assert 1 not in graph.nodes()
     assert (1, 2) not in graph.edges()
+    with pytest.raises(IndexError):
+        graph.del_node(7)
 
 
 def test_del_edge(create_graph):
@@ -74,6 +77,8 @@ def test_del_edge(create_graph):
     graph.del_edge(1, 2)
     assert (1, 2) not in graph.edges()
     assert 1 in graph.nodes()
+    with pytest.raises(IndexError):
+        graph.del_edge(1, 5)
 
 
 def test_has_node(create_graph):
@@ -104,4 +109,5 @@ def test_adjacent(create_graph):
     assert not graph.adjacent(2, 1)
     with pytest.raises(KeyError):
         graph.adjacent(6, 5)
+    with pytest.raises(KeyError):
         graph.adjacent(5, 6)
