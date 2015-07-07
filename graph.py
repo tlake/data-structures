@@ -43,7 +43,10 @@ class Graph(object):
     def del_edge(self, node1, node2):
         """Deletes the edge connecting node1 and node2 from the graph.
         Raises an error if no such edge exists."""
-        self.graph[node1].remove(node2)
+        if (node1, node2) in self.edges():
+            self.graph[node1].remove(node2)
+        else:
+            raise IndexError("Edge not in graph")
 
     def has_node(self, node):
         """True if node is in the graph, False if it is not."""
