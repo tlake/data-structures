@@ -9,10 +9,7 @@ class Graph(object):
 
     def nodes(self):
         """Returns a list of all nodes in the graph."""
-        keys = []
-        for key in self.graph.iterkeys():
-            keys.append(key)
-        return keys
+        return self.graph.keys()
 
     def edges(self):
         """Returns a list of all edges in the graph."""
@@ -60,9 +57,11 @@ class Graph(object):
             neighbors.append(neighbor)
         return neighbor
 
-    def adjacent(node1, node2):
+    def adjacent(self, node1, node2):
         """Returns True if there is an edge connecting node1 and node2.
         False if no such edge exists. Raises an error if either of the
         supplied nodes are not in the graph."""
-        pass
-
+        if node2 in self.graph[node1]:
+            return True
+        else:
+            return False
