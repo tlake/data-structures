@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from priorityq import PriorityQueue
+from data_structures.priorityq import PriorityQueue
 import pytest
 
 
@@ -38,11 +38,11 @@ def test_pq_insert1(create_pq):
     #  It will always be at the bottom of the list.
     #  AKA heapify up will never do anything.
     pq.insert(-1, "Test4")
-    assert pq.heap[len(pq.heap)-1].value == "Test4"
+    assert pq.heap[len(pq.heap) - 1].value == "Test4"
     pq.insert(-2, "Test5")
-    assert pq.heap[len(pq.heap)-1].value == "Test5"
+    assert pq.heap[len(pq.heap) - 1].value == "Test5"
     pq.insert(-3, "Test6")
-    assert pq.heap[len(pq.heap)-1].value == "Test6"
+    assert pq.heap[len(pq.heap) - 1].value == "Test6"
 
 
 def test_pq_insert2():

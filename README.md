@@ -94,3 +94,9 @@ Contains a Graph class with the following methods:
 - g.adjacent(n1, n2)
     * Returns True if there is an edge connecting n1 and n2, False if
     not. Raises an error if either of the supplied nodes are not in g.
+- g.breadth_first_traversal(start)
+    * Returns a list of nodes found by traversing the graph using a
+    breadth first methodology.
+- g.depth_first_traversal(start)
+    * Returns a list of nodes found by traversing the graph using a
+    depth first methodology.

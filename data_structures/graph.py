@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import unicode_literals
+import queue
 
 
 class Graph(object):
@@ -73,10 +74,64 @@ class Graph(object):
         if (node1 not in self.graph.iterkeys()
            or node2 not in self.graph.iterkeys()):
             raise KeyError
-
         verdict = False
-
         if node2 in self.graph[node1]:
             verdict = True
-
         return verdict
+
+    def depth_first_traversal(self, node):
+        result = []
+
+        def traverse(node):
+            if node not in result:
+                result.append(node)
+                for neighbor in self.neighbors(node):
+                    traverse(neighbor)
+        traverse(node)
+        return result
+
+    def breadth_first_traversal(self, start):
+        """Perform a full breadth-first traversal of the graph,
+        beginning at start. Return the full visited path when
+        traversal is complete."""
+
+        # import pdb; pdb.set_trace()
+
+        q = queue.Queue()
+        q.enqueue(start)
+        discovered = [start, ]
+
+        def traverse(start):
+            while q.size() > 0:
+                node = q.dequeue()
+
+                for neighbor in self.neighbors(node):
+                    if neighbor not in discovered:
+                        q.enqueue(neighbor)
+                        discovered.append(neighbor)
+
+                traverse(node)
+
+        traverse(start)
+
+        return discovered
+
+
+if __name__ == "__main__":
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5]
+    for n in nodes:
+        graph.add_node(n)
+    edges = [(1, 3), (1, 4), (2, 4), (2, 5), (3, 2)]
+    for e in edges:
+        graph.add_edge(e[0], e[1])
+
+    print "Given the graph with edges %s" % graph.edges()
+    print(
+        "Breadth first traversal of gives us %s"
+        % (graph.breadth_first_traversal(1))
+    )
+    print(
+        "Depth first traversal gives us %s" %
+        (graph.depth_first_traversal(1))
+    )
