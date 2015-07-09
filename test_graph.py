@@ -20,6 +20,24 @@ def create_graph():
     return graph
 
 
+@pytest.fixture()
+def create_graph2():
+    graph = Graph()
+    graph.add_node(1)
+    graph.add_node(2)
+    graph.add_node(3)
+    graph.add_node(4)
+    graph.add_node(5)
+    graph.add_edge(1, 3)
+    graph.add_edge(1, 4)
+    graph.add_edge(2, 4)
+    graph.add_edge(2, 5)
+    graph.add_edge(3, 2)
+    #  dft = [1, 3, 2, 4, 5]
+    #  bft = [1, 3, 4, 2, 5]
+    return graph
+
+
 def test_nodes(create_graph):
     graph = create_graph
     for node in [1, 2, 3, 4, 5]:
@@ -130,3 +148,25 @@ def test_adjacent(create_graph):
         graph.adjacent(6, 5)
     with pytest.raises(KeyError):
         graph.adjacent(5, 6)
+
+
+def test_depth_first_traversal(create_graph, create_graph2):
+    graph1 = create_graph
+    graph2 = create_graph2
+    assert graph1.depth_first_traversal(1) == [1, 2, 3, 4, 5]
+    assert graph2.depth_first_traversal(1) == [1, 3, 2, 4, 5]
+    assert graph1.depth_first_traversal(2) == [2, 3, 4, 5]
+    assert graph2.depth_first_traversal(2) == [2, 4, 5]
+    assert graph1.depth_first_traversal(3) == [3, 4, 5]
+    assert graph2.depth_first_traversal(3) == [3, 2, 4, 5]
+
+
+def test_breadth_first_traversal(create_graph, create_graph2):
+    graph1 = create_graph
+    graph2 = create_graph2
+    assert graph1.breadth_first_traversal(1) == [1, 2, 3, 4, 5]
+    assert graph1.breadth_first_traversal(2) == [2, 3, 4, 5]
+    assert graph1.breadth_first_traversal(3) == [3, 4, 5]
+    assert graph2.breadth_first_traversal(1) == [1, 3, 4, 2, 5]
+    assert graph2.breadth_first_traversal(3) == [3, 2, 4, 5]
+    assert graph2.breadth_first_traversal(4) == [4]
