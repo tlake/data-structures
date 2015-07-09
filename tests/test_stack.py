@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 import pytest
-from stack import Stack
+from data_structures.stack import Stack
 
 
 @pytest.fixture()

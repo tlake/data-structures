@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 import pytest
-from graph import Graph
+from data_structures.graph import Graph
 
 
 @pytest.fixture()

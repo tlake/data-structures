@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 import pytest
-from queue import Queue
+from data_structures.queue import Queue
 
 
 @pytest.fixture()

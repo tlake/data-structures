@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
-from parenthetics import parenthetics
+from data_structures.parenthetics import parenthetics
 
 testText = "12345m67890!@#~`$%^&*/.,;'=-+_[]{}:?<>'"
 testSymbols = ['()', '{}', '[]', '<>', '5m']
