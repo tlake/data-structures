@@ -73,10 +73,18 @@ class Graph(object):
         if (node1 not in self.graph.iterkeys()
            or node2 not in self.graph.iterkeys()):
             raise KeyError
-
         verdict = False
-
         if node2 in self.graph[node1]:
             verdict = True
-
         return verdict
+
+    def depth_first_traversal(self, node):
+        result = []
+
+        def traverse(node):
+            if node not in result:
+                result.append(node)
+                for neighbor in self.neighbors(node):
+                    traverse(neighbor)
+        traverse(node)
+        return result

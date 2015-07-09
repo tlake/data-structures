@@ -153,12 +153,16 @@ def test_adjacent(create_graph):
 def test_depth_first_traversal(create_graph, create_graph2):
     graph1 = create_graph
     graph2 = create_graph2
-    assert graph1.depth_first_traversal() == [1, 2, 3, 4, 5]
-    assert graph2.depth_first_traversal() == [1, 3, 2, 4, 5]
+    assert graph1.depth_first_traversal(1) == [1, 2, 3, 4, 5]
+    assert graph2.depth_first_traversal(1) == [1, 3, 2, 4, 5]
+    assert graph1.depth_first_traversal(2) == [2, 3, 4, 5]
+    assert graph2.depth_first_traversal(2) == [2, 4, 5]
+    assert graph1.depth_first_traversal(3) == [3, 4, 5]
+    assert graph2.depth_first_traversal(3) == [3, 2, 4, 5]
 
 
-def test_breadth_first_traversal(create_graph, create_graph2):
-    graph1 = create_graph
-    graph2 = create_graph2
-    assert graph1.breadth_first_traversal() == [1, 2, 3, 4, 5]
-    assert graph2.breadth_first_traversal() == [1, 3, 4, 2, 5]
+# def test_breadth_first_traversal(create_graph, create_graph2):
+#     graph1 = create_graph
+#     graph2 = create_graph2
+#     assert graph1.breadth_first_traversal(1) == [1, 2, 3, 4, 5]
+#     assert graph2.breadth_first_traversal(1) == [1, 3, 4, 2, 5]
