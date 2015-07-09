@@ -114,3 +114,21 @@ class Graph(object):
         traverse(start)
 
         return discovered
+
+if __name__ == "__main__":
+    graph = Graph()
+    graph.add_node(1)
+    graph.add_node(2)
+    graph.add_node(3)
+    graph.add_node(4)
+    graph.add_node(5)
+    graph.add_edge(1, 3)
+    graph.add_edge(1, 4)
+    graph.add_edge(2, 4)
+    graph.add_edge(2, 5)
+    graph.add_edge(3, 2)
+    print "Given the graph with edges %s" % graph.edges()
+    print ("Breadth first traversal of gives us %s"
+           % (graph.breadth_first_traversal(1)))
+    print ("Depth first traversal gives us %s" %
+           (graph.depth_first_traversal(1)))
