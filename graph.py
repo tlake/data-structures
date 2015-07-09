@@ -104,12 +104,13 @@ class Graph(object):
         def traverse(start):
             while queue.size() > 0:
                 node = queue.dequeue()
-                traverse(node)
 
                 for neighbor in self.neighbors(node):
                     if neighbor not in discovered:
                         queue.enqueue(neighbor)
                         discovered.append(neighbor)
+
+                traverse(node)
 
         traverse(start)
 
