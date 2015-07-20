@@ -122,9 +122,9 @@ if __name__ == "__main__":
     nodes = [1, 2, 3, 4, 5]
     for n in nodes:
         graph.add_node(n)
-    edges = [(1, 3), (1, 4), (2, 4), (2, 5), (3, 2)]
+    edges = [(1, 3, 5), (1, 4, 2), (2, 4, 3), (2, 5, 9), (3, 2, 7)]
     for e in edges:
-        graph.add_edge(e[0], e[1])
+        graph.add_edge(e[0], e[1], e[2])
 
     print "Given the graph with edges %s" % graph.edges()
     print(
