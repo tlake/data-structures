@@ -63,7 +63,7 @@ def cyclical_graph():
     for n in nodes:
         graph.add_node(n)
     for e in edges:
-        graph.add_edge(e[0], e[1])
+        graph.add_edge(e[0], e[1], e[2])
     return graph
 
 
@@ -76,8 +76,8 @@ def test_nodes(create_graph):
 def test_edges(create_graph):
     graph = create_graph
     for edge in [
-        (1, {2: 1}), (2, {3: 2}),
-        (3, {4: 3}), (4, {5: 4})
+        (1, 2), (2, 3),
+        (3, 4), (4, 5)
     ]:
         assert edge in graph.edges()
 
