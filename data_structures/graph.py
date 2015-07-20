@@ -43,7 +43,7 @@ class Graph(object):
             raise IndexError("Node not in graph")
         for node in self.graph.keys():
             try:
-                self.del_edge(del_node, node)
+                self.del_edge(node, del_node)
             except IndexError:
                 pass
 
