@@ -9,15 +9,11 @@ from data_structures.graph import Graph
 def create_graph():
     graph = Graph()
     nodes = [1, 2, 3, 4, 5]
-    edges = [
-        (1, 2, 1), (2, 3, 2),
-        (3, 4, 3), (4, 5, 6)
-    ]
+    edges = [(1, 2), (2, 3), (3, 4), (4, 5)]
     for n in nodes:
         graph.add_node(n)
     for e in edges:
-        # node1, node2, weight
-        graph.add_edge(e[0], e[1], e[2])
+        graph.add_edge(e[0], e[1])
     return graph
 
 
@@ -25,14 +21,13 @@ def create_graph():
 def create_graph2():
     graph = Graph()
     nodes = [1, 2, 3, 4, 5]
-    edges = [
-        (1, 3, 2), (1, 4, 2), (2, 4, 3),
-        (2, 5, 4), (3, 2, 1)
-    ]
+    edges = [(1, 3), (1, 4), (2, 4), (2, 5), (3, 2)]
     for n in nodes:
         graph.add_node(n)
     for e in edges:
-        graph.add_edge(e[0], e[1], e[2])
+        graph.add_edge(e[0], e[1])
+    #  dft = [1, 3, 2, 4, 5]
+    #  bft = [1, 3, 4, 2, 5]
     return graph
 
 
@@ -40,14 +35,11 @@ def create_graph2():
 def create_graph3():
     graph = Graph()
     nodes = [1, 2, 3, 4, 5]
-    edges = [
-        (1, 3, 1), (1, 2, 2), (3, 6, 3),
-        (2, 4, 2), (4, 5, 1)
-    ]
+    edges = [(1, 3), (1, 2), (3, 6), (2, 4), (4, 5)]
     for n in nodes:
         graph.add_node(n)
     for e in edges:
-        graph.add_edge(e[0], e[1], e[2])
+        graph.add_edge(e[0], e[1])
     return graph
 
 
@@ -55,11 +47,7 @@ def create_graph3():
 def cyclical_graph():
     graph = Graph()
     nodes = [1, 2, 3, 4, 5, 6, 7]
-    edges = [
-        (1, 2, 3), (2, 3, 3), (3, 5, 2),
-        (5, 4, 2), (5, 6, 1), (4, 2, 1),
-        (4, 7, 1)
-    ]
+    edges = [(1, 2), (2, 3), (3, 5), (5, 4), (5, 6), (4, 2), (4, 7)]
     for n in nodes:
         graph.add_node(n)
     for e in edges:
@@ -75,10 +63,7 @@ def test_nodes(create_graph):
 
 def test_edges(create_graph):
     graph = create_graph
-    for edge in [
-        (1, {2: 1}), (2, {3: 2}),
-        (3, {4: 3}), (4, {5: 4})
-    ]:
+    for edge in [(1, 2), (2, 3), (3, 4), (4, 5)]:
         assert edge in graph.edges()
 
 
@@ -86,6 +71,8 @@ def test_add_node(create_graph):
     graph = create_graph
     graph.add_node(6)
     assert 6 in graph.nodes()
+    graph.add_node(7, [1, 2, 3, 4, 5, 6])
+    assert 7 in graph.nodes()
 
 
 def test_add_edge(create_graph):
@@ -94,14 +81,13 @@ def test_add_edge(create_graph):
     node is added to the graph.
     """
     graph = create_graph
-    graph.add_edge(5, 1, 3)
-    graph.add_edge(5, 6, 4)
-    edge_one = (5, {1: 3})
-    edge_two = (5, {6: 4})
-    added_node = (6, {})
+    graph.add_edge(5, 1)
+    graph.add_edge(5, 6)
+    edge_one = (5, 1)
+    edge_two = (5, 6)
     assert edge_one in graph.edges()
     assert edge_two in graph.edges()
-    assert added_node in graph.nodes()
+    assert 6 in graph.nodes()
 
 
 def test_del_node(create_graph):
@@ -111,7 +97,7 @@ def test_del_node(create_graph):
     is raised if the node is not there.
     """
     graph = create_graph
-    graph.add_edge(2, 1, 5)
+    graph.add_edge(2, 1)
     graph.del_node(1)
     assert 1 not in graph.nodes()
     assert (1, 2) not in graph.edges()
@@ -155,8 +141,8 @@ def test_neighbors(create_graph):
     graph = create_graph
     assert 2 in graph.neighbors(1)
     assert 4 not in graph.neighbors(1)
-    graph.add_edge(1, 3, 0)
-    graph.add_edge(1, 4, 2)
+    graph.add_edge(1, 3)
+    graph.add_edge(1, 4)
     assert 3 in graph.neighbors(1)
     assert 4 in graph.neighbors(1)
     graph.del_edge(1, 3)
