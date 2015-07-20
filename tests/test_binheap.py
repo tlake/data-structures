@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from bin_heap import BinaryHeap
+from data_structures.bin_heap import BinaryHeap
 import pytest
 
 
@@ -28,7 +28,7 @@ def test_binheap_push(create_binheap):
     assert binheap.heap[0] == 125
     binheap.push(4)
     assert binheap.heap[0] == 125
-    assert binheap.heap[binheap.size-1] == 4
+    assert binheap.heap[binheap.size - 1] == 4
 
 
 def test_binheap_length(create_binheap, create_empty_binheap):

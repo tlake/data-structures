@@ -2,39 +2,56 @@
 
 from __future__ import unicode_literals
 import pytest
-from graph import Graph
+from data_structures.graph import Graph
 
 
 @pytest.fixture()
 def create_graph():
     graph = Graph()
-    graph.add_node(1)
-    graph.add_node(2)
-    graph.add_node(3)
-    graph.add_node(4)
-    graph.add_node(5)
-    graph.add_edge(1, 2)
-    graph.add_edge(2, 3)
-    graph.add_edge(3, 4)
-    graph.add_edge(4, 5)
+    nodes = [1, 2, 3, 4, 5]
+    edges = [(1, 2), (2, 3), (3, 4), (4, 5)]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1])
     return graph
 
 
 @pytest.fixture()
 def create_graph2():
     graph = Graph()
-    graph.add_node(1)
-    graph.add_node(2)
-    graph.add_node(3)
-    graph.add_node(4)
-    graph.add_node(5)
-    graph.add_edge(1, 3)
-    graph.add_edge(1, 4)
-    graph.add_edge(2, 4)
-    graph.add_edge(2, 5)
-    graph.add_edge(3, 2)
+    nodes = [1, 2, 3, 4, 5]
+    edges = [(1, 3), (1, 4), (2, 4), (2, 5), (3, 2)]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1])
     #  dft = [1, 3, 2, 4, 5]
     #  bft = [1, 3, 4, 2, 5]
+    return graph
+
+
+@pytest.fixture()
+def create_graph3():
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5]
+    edges = [(1, 3), (1, 2), (3, 6), (2, 4), (4, 5)]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1])
+    return graph
+
+
+@pytest.fixture()
+def cyclical_graph():
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5, 6, 7]
+    edges = [(1, 2), (2, 3), (3, 5), (5, 4), (5, 6), (4, 2), (4, 7)]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1])
     return graph
 
 
@@ -150,23 +167,31 @@ def test_adjacent(create_graph):
         graph.adjacent(5, 6)
 
 
-def test_depth_first_traversal(create_graph, create_graph2):
+def test_depth_first_traversal(create_graph, create_graph2, cyclical_graph):
     graph1 = create_graph
     graph2 = create_graph2
+    c_graph = cyclical_graph
     assert graph1.depth_first_traversal(1) == [1, 2, 3, 4, 5]
     assert graph2.depth_first_traversal(1) == [1, 3, 2, 4, 5]
     assert graph1.depth_first_traversal(2) == [2, 3, 4, 5]
     assert graph2.depth_first_traversal(2) == [2, 4, 5]
     assert graph1.depth_first_traversal(3) == [3, 4, 5]
     assert graph2.depth_first_traversal(3) == [3, 2, 4, 5]
+    assert c_graph.depth_first_traversal(1) == [1, 2, 3, 5, 4, 7, 6]
 
 
-def test_breadth_first_traversal(create_graph, create_graph2):
+def test_breadth_first_traversal(
+    create_graph, create_graph2, create_graph3, cyclical_graph
+):
     graph1 = create_graph
     graph2 = create_graph2
+    graph3 = create_graph3
+    c_graph = cyclical_graph
     assert graph1.breadth_first_traversal(1) == [1, 2, 3, 4, 5]
     assert graph1.breadth_first_traversal(2) == [2, 3, 4, 5]
     assert graph1.breadth_first_traversal(3) == [3, 4, 5]
     assert graph2.breadth_first_traversal(1) == [1, 3, 4, 2, 5]
     assert graph2.breadth_first_traversal(3) == [3, 2, 4, 5]
     assert graph2.breadth_first_traversal(4) == [4]
+    assert c_graph.breadth_first_traversal(1) == [1, 2, 3, 5, 4, 6, 7]
+    assert graph3.breadth_first_traversal(1) == [1, 3, 2, 6, 4, 5]

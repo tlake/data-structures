@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from doubly_linked_list import DoublyLinkedList
+from data_structures.doubly_linked_list import DoublyLinkedList
 import pytest
 
 

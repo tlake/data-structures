@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import unicode_literals
-from queue import Queue
+import queue
 
 
 class Graph(object):
@@ -97,20 +97,41 @@ class Graph(object):
 
         # import pdb; pdb.set_trace()
 
-        queue = Queue()
-        queue.enqueue(start)
+        q = queue.Queue()
+        q.enqueue(start)
         discovered = [start, ]
 
         def traverse(start):
-            while queue.size() > 0:
-                node = queue.dequeue()
-                traverse(node)
+            while q.size() > 0:
+                node = q.dequeue()
 
                 for neighbor in self.neighbors(node):
                     if neighbor not in discovered:
-                        queue.enqueue(neighbor)
+                        q.enqueue(neighbor)
                         discovered.append(neighbor)
+
+                traverse(node)
 
         traverse(start)
 
         return discovered
+
+
+if __name__ == "__main__":
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5]
+    for n in nodes:
+        graph.add_node(n)
+    edges = [(1, 3), (1, 4), (2, 4), (2, 5), (3, 2)]
+    for e in edges:
+        graph.add_edge(e[0], e[1])
+
+    print "Given the graph with edges %s" % graph.edges()
+    print(
+        "Breadth first traversal of gives us %s"
+        % (graph.breadth_first_traversal(1))
+    )
+    print(
+        "Depth first traversal gives us %s" %
+        (graph.depth_first_traversal(1))
+    )
