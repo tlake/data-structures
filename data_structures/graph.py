@@ -16,42 +16,42 @@ class Graph(object):
         """Returns a list of all edges in the graph."""
         edges = []
         for node, neighbors in self.graph.iteritems():
-            for neighbor in self.graph[node]:
+            for neighbor in self.graph[node].keys():
                 edges.append((node, neighbor))
         return edges
 
-    def add_node(self, new_node, neighbors=[]):
+    def add_node(self, new_node):
         """Adds a new node to the graph"""
         if new_node not in self.nodes():
-            self.graph[new_node] = []
-            for node in neighbors:
-                self.add_edge(new_node, node)
+            self.graph[new_node] = {}
         else:
             raise ValueError("Node is already in the list.")
 
-    def add_edge(self, node1, node2):
+    def add_edge(self, node1, node2, weight):
         """Adds a new edge to the graph connecting node1 to node2.
         If either node1 or node2 are not already present in the
         graph, they are added."""
-        self.graph.setdefault(node1, []).append(node2)
-        self.graph.setdefault(node2, [])
+        self.graph.setdefault(node1, {}).update({node2: weight})
+        self.graph.setdefault(node2, {})
 
     def del_node(self, del_node):
         """Deletes the node from the graph. Raises an error if no
         such node exists"""
-        if del_node in self.graph.keys():
+        try:
             del(self.graph[del_node])
-            for node in self.graph.keys():
-                if del_node in self.graph[node]:
-                    self.graph[node].remove(del_node)
-        else:
+        except:
             raise IndexError("Node not in graph")
+        for node in self.graph.keys():
+            try:
+                self.del_edge(del_node, node)
+            except IndexError:
+                pass
 
     def del_edge(self, node1, node2):
         """Deletes the edge connecting node1 and node2 from the graph.
         Raises an error if no such edge exists."""
         if (node1, node2) in self.edges():
-            self.graph[node1].remove(node2)
+            del(self.graph[node1][node2])
         else:
             raise IndexError("Edge not in graph")
 
@@ -65,7 +65,7 @@ class Graph(object):
     def neighbors(self, node):
         """Returns a list of all nodes connected to node by edges.
         Raises an error if node is not in the graph."""
-        return self.graph[node]
+        return self.graph[node].keys()
 
     def adjacent(self, node1, node2):
         """Returns True if there is an edge connecting node1 and node2.
