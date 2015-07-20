@@ -67,6 +67,24 @@ def cyclical_graph():
     return graph
 
 
+@pytest.fixture()
+def create_spaghetti():
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    edges = [
+        (1, 2, 3), (1, 3, 2), (1, 4, 5),
+        (2, 9, 5), (2, 5, 3), (2, 6, 6),
+        (3, 5, 5), (3, 7, 2), (4, 6, 6),
+        (4, 8, 2), (9, 5, 4), (6, 9, 4),
+        (7, 8, 5)
+    ]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1], e[2])
+    return graph
+
+
 def test_nodes(create_graph):
     graph = create_graph
     for node in [1, 2, 3, 4, 5]:
@@ -195,12 +213,14 @@ def test_depth_first_traversal(create_graph, create_graph2, cyclical_graph):
 
 
 def test_breadth_first_traversal(
-    create_graph, create_graph2, create_graph3, cyclical_graph
+    create_graph, create_graph2, create_graph3,
+    cyclical_graph, create_spaghetti
 ):
     graph1 = create_graph
     graph2 = create_graph2
     graph3 = create_graph3
     c_graph = cyclical_graph
+    spag = create_spaghetti
     assert graph1.breadth_first_traversal(1) == [1, 2, 3, 4, 5]
     assert graph1.breadth_first_traversal(2) == [2, 3, 4, 5]
     assert graph1.breadth_first_traversal(3) == [3, 4, 5]
@@ -208,4 +228,5 @@ def test_breadth_first_traversal(
     assert graph2.breadth_first_traversal(3) == [3, 2, 4, 5]
     assert graph2.breadth_first_traversal(4) == [4]
     assert c_graph.breadth_first_traversal(1) == [1, 2, 3, 5, 4, 6, 7]
-    assert graph3.breadth_first_traversal(1) == [1, 3, 2, 6, 4, 5]
+    assert graph3.breadth_first_traversal(1) == [1, 2, 3, 4, 6, 5]
+    assert spag.breadth_first_traversal(1) == [1, 2, 3, 4, 9, 5, 6, 7, 8]
