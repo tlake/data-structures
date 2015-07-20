@@ -68,21 +68,22 @@ Contains a Node that holds variable, order and priority values.  Also contains a
 **Methods:**  insert, pop, peek
 
 
-### Simple Graph (directed; unweighted):
+### Simple Graph (directed; weighted):
 Contains a Graph class with the following methods:
 
 - g.nodes()
     * Returns a list of all nodes in the graph.
 - g.edges()
-    * Returns a list of all edges in the graph.
+    * Returns a list of all edges in the graph (without weights).
 - g.add_node(n)
     * Adds a new node 'n' to the graph.
-- g.add_edge(n1, n2)
-    * Adds a new edge to the graph connecting 'n1' and 'n2'. If either
+- g.add_edge(n1, n2, weight)
+    * Adds a new edge to the graph connecting 'n1' and 'n2' with the given 'weight'. If either
     n1 or n2 are not already present in the graph, they should be added.
 - g.del_node(n)
     * Deletes the node 'n' from the graph, raises an error if no such
     node exists.
+    * Removes all edges connecting node 'n' to another node.
 - g.del_edge(n1, n2)
     * Deletes the edge connecting 'n1' and 'n2' from the graph, raises\
     an error if no such edge exists.
