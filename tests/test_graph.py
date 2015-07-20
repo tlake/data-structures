@@ -98,7 +98,7 @@ def test_add_edge(create_graph):
     graph.add_edge(5, 6, 4)
     edge_one = (5, 1)
     edge_two = (5, 6)
-    added_node = (6, {})
+    added_node = 6
     assert edge_one in graph.edges()
     assert edge_two in graph.edges()
     assert added_node in graph.nodes()
