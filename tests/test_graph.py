@@ -73,10 +73,27 @@ def create_spaghetti():
     nodes = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     edges = [
         (1, 2, 3), (1, 3, 2), (1, 4, 5),
-        (2, 9, 5), (2, 5, 3), (2, 6, 6),
-        (3, 5, 5), (3, 7, 2), (4, 6, 6),
-        (4, 8, 2), (9, 5, 4), (6, 9, 4),
-        (7, 8, 5)
+        (2, 9, 5), (2, 5, 3), (2, 6, 1),
+        (3, 5, 5), (3, 7, 5), (4, 6, 6),
+        (4, 8, 2), (5, 9, 3), (6, 9, 5),
+        (7, 8, 5), (4, 7, 1)
+    ]
+    for n in nodes:
+        graph.add_node(n)
+    for e in edges:
+        graph.add_edge(e[0], e[1], e[2])
+    return graph
+
+
+@pytest.fixture()
+def create_dijk():
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    edges = [
+        (1, 2, 2), (2, 11, 2), (2, 12, 1), (2, 7, 1),
+        (1, 3, 3), (3, 10, 3), (3, 8, 1), (3, 9, 3),
+        (9, 8, 1), (1, 4, 1), (4, 7, 3), (4, 6, 1),
+        (4, 5, 2), (6, 7, 1)
     ]
     for n in nodes:
         graph.add_node(n)
@@ -217,16 +234,34 @@ def test_breadth_first_traversal(
     cyclical_graph, create_spaghetti
 ):
     graph1 = create_graph
-    graph2 = create_graph2
-    graph3 = create_graph3
-    c_graph = cyclical_graph
-    spag = create_spaghetti
     assert graph1.breadth_first_traversal(1) == [1, 2, 3, 4, 5]
     assert graph1.breadth_first_traversal(2) == [2, 3, 4, 5]
     assert graph1.breadth_first_traversal(3) == [3, 4, 5]
+
+    graph2 = create_graph2
     assert graph2.breadth_first_traversal(1) == [1, 3, 4, 2, 5]
     assert graph2.breadth_first_traversal(3) == [3, 2, 4, 5]
     assert graph2.breadth_first_traversal(4) == [4]
+
+    c_graph = cyclical_graph
     assert c_graph.breadth_first_traversal(1) == [1, 2, 3, 5, 4, 6, 7]
+
+    graph3 = create_graph3
     assert graph3.breadth_first_traversal(1) == [1, 2, 3, 4, 6, 5]
-    assert spag.breadth_first_traversal(1) == [1, 2, 3, 4, 9, 5, 6, 7, 8]
+
+    spag = create_spaghetti
+    t1_nodes = [1]
+    t2_nodes = [2, 3, 4]
+    t3_nodes = [6, 9, 5, 7, 8]
+    bft_vals = spag.breadth_first_traversal(1)
+    assert bft_vals[0] in t1_nodes
+    for ndx in [1, 2, 3]:
+        assert bft_vals[ndx] in t2_nodes
+    for ndx in [4, 5, 6, 7, 8]:
+        assert bft_vals[ndx] in t3_nodes
+
+
+# def test_dijkstra(create_dijk):
+#     graph = create_dijk
+#     assert graph.dijkstra(1, 7) == (3, [1, 2, 7])
+#     assert graph.dijkstra()
