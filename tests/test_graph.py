@@ -278,9 +278,9 @@ def test_dijkstra(create_dijk, create_spaghetti):
     # total weight of node 9 should be 8
     assert spag_vals[0][9] == 8
     # total weight of node 8 should be 7
-    assert spag_vals[0][8] == [7]
+    assert spag_vals[0][8] == 7
     # total weight of node 6 should be 4
-    assert spag_vals[0][6] == [4]
+    assert spag_vals[0][6] == 4
     # prev node of node 9 should be 2
     assert spag_vals[1][9] == 2
     # prev node of node 8 should be 4
