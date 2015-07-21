@@ -131,10 +131,10 @@ class Graph(object):
         while unvisited:
             tmp = []
             for node in unvisited:
-                tmp.append((distances['node'], node))
+                tmp.append((distances[node], node))
             cur = min(tmp)[1]
 
-            for neighbor in cur.neighbors():
+            for neighbor in self.neighbors(cur):
                 temp_dist = distances[cur] + self.graph[cur][neighbor]
                 if temp_dist < distances[neighbor]:
                     distances[neighbor] = temp_dist

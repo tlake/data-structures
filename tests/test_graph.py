@@ -93,7 +93,7 @@ def create_dijk():
         (1, 2, 2), (2, 11, 2), (2, 12, 1), (2, 7, 1),
         (1, 3, 3), (3, 10, 3), (3, 8, 1), (3, 9, 3),
         (9, 8, 1), (1, 4, 1), (4, 7, 3), (4, 6, 1),
-        (4, 5, 2), (6, 7, 1)
+        (4, 5, 2), (6, 7, 2)
     ]
     for n in nodes:
         graph.add_node(n)
@@ -261,7 +261,29 @@ def test_breadth_first_traversal(
         assert bft_vals[ndx] in t3_nodes
 
 
-# def test_dijkstra(create_dijk):
-#     graph = create_dijk
-#     assert graph.dijkstra(1, 7) == (3, [1, 2, 7])
-#     assert graph.dijkstra()
+def test_dijkstra(create_dijk, create_spaghetti):
+    graph = create_dijk
+    dijk_vals = graph.dijkstra(1)
+    # total weight of node 7 should be 3
+    assert dijk_vals[0][7] == 3
+    # total weight of node 8 should be 4
+    assert dijk_vals[0][8] == 4
+    # prev node of node 7 should be node 2
+    assert dijk_vals[1][7] == 2
+    # prev node of node 8 should be node 3
+    assert dijk_vals[1][8] == 3
+
+    spag = create_spaghetti
+    spag_vals = spag.dijkstra(1)
+    # total weight of node 9 should be 8
+    assert spag_vals[0][9] == 8
+    # total weight of node 8 should be 7
+    assert spag_vals[0][8] == [7]
+    # total weight of node 6 should be 4
+    assert spag_vals[0][6] == [4]
+    # prev node of node 9 should be 2
+    assert spag_vals[1][9] == 2
+    # prev node of node 8 should be 4
+    assert spag_vals[1][8] == 4
+    # prev node of node 6 should be 2
+    assert spag_vals[1][6] == 2
