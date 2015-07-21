@@ -156,7 +156,7 @@ class Graph(object):
 
         # print shortest_paths
 
-    def BellmanFord(self, nodes, edges, start):
+    def BellmanFord(self, start):
         distance = {}
         predecessor = {}
 
