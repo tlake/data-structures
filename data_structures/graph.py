@@ -133,6 +133,7 @@ class Graph(object):
             for node in unvisited:
                 tmp.append((distances[node], node))
             cur = min(tmp)[1]
+            unvisited.remove(cur)
 
             for neighbor in self.neighbors(cur):
                 temp_dist = distances[cur] + self.graph[cur][neighbor]
