@@ -126,7 +126,7 @@ class Graph(object):
             if node != start:
                 distances[node] = float('inf')
                 prevs[node] = None
-            unvisited.put(distances[node], node)
+            unvisited.append(node)
 
         while not unvisited.empty():
             tmp = []
@@ -155,6 +155,29 @@ class Graph(object):
         #     self.graph[cur][node]
 
         # print shortest_paths
+
+    def BellmanFord(self, nodes, edges, start):
+        distance = {}
+        predecessor = {}
+
+        for node in self.graph.nodes:
+            if node == start:
+                distance[node] = 0
+            else:
+                distance[node] = float('inf')
+                predecessor[node] = None
+
+        for i in range(self.graph.size):
+            for edge in self.graph.edges:
+                if distance[edge[0]] + edge[2] < distance[edge[1]]:
+                    distance[edge[1]] = distance[edge[0]] + edge[2]
+                    predecessor[edge[1]] = edge[0]
+
+        for edge in self.graph.edges:
+            if distance[edge[0]] + edge[2] < distance[edge[1]]:
+                raise ValueError("Graph contains a negative-weight cycle")
+
+        return distance, predecessor
 
 
 if __name__ == "__main__":
