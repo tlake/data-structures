@@ -128,7 +128,7 @@ class Graph(object):
                 prevs[node] = None
             unvisited.append(node)
 
-        while not unvisited.empty():
+        while unvisited:
             tmp = []
             for node in unvisited:
                 tmp.append((distances['node'], node))
