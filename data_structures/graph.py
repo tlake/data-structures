@@ -2,7 +2,6 @@
 
 from __future__ import unicode_literals
 import queue
-from Queue import PriorityQueue
 
 
 class Graph(object):
@@ -120,7 +119,7 @@ class Graph(object):
     def dijkstra(self, start):
         distances = {}
         prevs = {}
-        unvisited = PriorityQueue()
+        unvisited = []
 
         distances[start] = 0
         for node in self.graph.keys():
@@ -130,15 +129,17 @@ class Graph(object):
             unvisited.put(distances[node], node)
 
         while not unvisited.empty():
-            cur = unvisited.pop()
+            tmp = []
+            for node in unvisited:
+                tmp.append((distances['node'], node))
+            cur = min(tmp)[1]
 
             for neighbor in cur.neighbors():
                 temp_dist = distances[cur] + self.graph[cur][neighbor]
                 if temp_dist < distances[neighbor]:
                     distances[neighbor] = temp_dist
                     prevs[neighbor] = cur
-        return True
-
+        return distances, prevs
 
         # shortest_paths = {}
         # unvisited = PriorityQueue()
@@ -148,7 +149,6 @@ class Graph(object):
         #     unvisited.insert(2000000000, node)
         # shortest_paths[start] = 0
         # unvisited.remove(start)
-
 
         # neighbors = []
         # for node in cur.neighbors():
