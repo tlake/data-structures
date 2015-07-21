@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 import queue
-from priorityq import PriorityQueue
+from Queue import PriorityQueue
 
 
 class Graph(object):
@@ -121,20 +121,22 @@ class Graph(object):
         distances = {}
         prevs = {}
         unvisited = PriorityQueue()
+
+        distances[start] = 0
         for node in self.graph.keys():
             if node != start:
-                distances.update({node: float('inf')})
-                prevs.update({node: None})
-            unvisited.insert(distances[node], node)
+                distances[node] = float('inf')
+                prevs[node] = None
+            unvisited.put(distances[node], node)
 
-        while len(unvisited.heap) != 0:
+        while not unvisited.empty():
             cur = unvisited.pop()
 
             for neighbor in cur.neighbors():
                 temp_dist = distances[cur] + self.graph[cur][neighbor]
                 if temp_dist < distances[neighbor]:
-                    neighbor['dist'] = temp_dist
-                    neighbor['prev'] = cur
+                    distances[neighbor] = temp_dist
+                    prevs[neighbor] = cur
         return True
 
 
