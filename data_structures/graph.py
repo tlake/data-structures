@@ -160,21 +160,21 @@ class Graph(object):
         distance = {}
         predecessor = {}
 
-        for node in self.graph.nodes:
+        for node in self.nodes():
             if node == start:
                 distance[node] = 0
             else:
                 distance[node] = float('inf')
                 predecessor[node] = None
 
-        for i in range(self.graph.size):
-            for edge in self.graph.edges:
-                if distance[edge[0]] + edge[2] < distance[edge[1]]:
-                    distance[edge[1]] = distance[edge[0]] + edge[2]
+        for i in range(len(self.graph)):
+            for edge in self.edges():
+                if distance[edge[0]] + self.graph[edge[0]][edge[1]] < distance[edge[1]]:
+                    distance[edge[1]] = distance[edge[0]] + self.graph[edge[0]][edge[1]]
                     predecessor[edge[1]] = edge[0]
 
-        for edge in self.graph.edges:
-            if distance[edge[0]] + edge[2] < distance[edge[1]]:
+        for edge in self.edges():
+            if distance[edge[0]] + self.graph[edge[0]][edge[1]] < distance[edge[1]]:
                 raise ValueError("Graph contains a negative-weight cycle")
 
         return distance, predecessor

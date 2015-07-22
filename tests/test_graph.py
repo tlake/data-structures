@@ -102,6 +102,21 @@ def create_dijk():
     return graph
 
 
+@pytest.fixture()
+def create_negative():
+    graph = Graph()
+    nodes = [1, 2, 3, 4, 'a', 'b', 'c']
+    edges = [
+        (1, 'c', -1), (1, 'b', -2),
+        (2, 'c', -2),
+        (3, 'a', -5), (3, 1, -9),
+        ('c', 1, 1), ('c', 2, 3),
+        ('b', 3, -7)]
+    for e in edges:
+        graph.add_edge(e[0], e[1], e[2])
+    return graph
+
+
 def test_nodes(create_graph):
     graph = create_graph
     for node in [1, 2, 3, 4, 5]:
@@ -259,9 +274,3 @@ def test_breadth_first_traversal(
         assert bft_vals[ndx] in t2_nodes
     for ndx in [4, 5, 6, 7, 8]:
         assert bft_vals[ndx] in t3_nodes
-
-
-# def test_dijkstra(create_dijk):
-#     graph = create_dijk
-#     assert graph.dijkstra(1, 7) == (3, [1, 2, 7])
-#     assert graph.dijkstra()
