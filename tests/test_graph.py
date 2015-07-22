@@ -105,13 +105,22 @@ def create_dijk():
 @pytest.fixture()
 def create_negative():
     graph = Graph()
-    nodes = [1, 2, 3, 4, 'a', 'b', 'c']
+    # nodes = [1, 2, 3, 4, 'a', 'b', 'c']
     edges = [
         (1, 'c', -1), (1, 'b', -2),
         (2, 'c', -2),
         (3, 'a', -5), (3, 1, -9),
         ('c', 1, 1), ('c', 2, 3),
         ('b', 3, -7)]
+    for e in edges:
+        graph.add_edge(e[0], e[1], e[2])
+    return graph
+
+
+@pytest.fixture()
+def create_simple():
+    graph = Graph()
+    edges = [(1, 2, 1), (1, 3, 4), (2, 3, 1)]
     for e in edges:
         graph.add_edge(e[0], e[1], e[2])
     return graph
@@ -305,7 +314,7 @@ def test_dijkstra(create_dijk, create_spaghetti):
 
 
 def test_bellman(create_graph, create_graph2, create_negative, create_graph3,
-                 cyclical_graph, create_spaghetti, create_dijk):
+                 cyclical_graph, create_spaghetti, create_dijk, create_simple):
     assert create_graph.BellmanFord(1) == ({1: 0, 2: 1, 3: 3, 4: 6, 5: 12},
                                            {2: 1, 3: 2, 4: 3, 5: 4})
     assert create_graph2.BellmanFord(1) == ({1: 0, 2: 3, 3: 2, 4: 2, 5: 7},
@@ -318,9 +327,9 @@ def test_bellman(create_graph, create_graph2, create_negative, create_graph3,
     assert create_spaghetti.BellmanFord(1) == (
         {1: 0, 2: 3, 3: 2, 4: 5, 5: 6, 6: 4, 7: 6, 8: 7, 9: 8},
         {2: 1, 3: 1, 4: 1, 5: 2, 6: 2, 7: 4, 8: 4, 9: 2})
-    print create_dijk.BellmanFord(1) == (
+    assert create_dijk.BellmanFord(1) == (
         {1: 0, 2: 2, 3: 3, 4: 1, 5: 3, 6: 2, 7: 3, 8: 4, 9: 6, 10: 6, 11: 4, 12: 3},
         {2: 1, 3: 1, 4: 1, 5: 4, 6: 4, 7: 2, 8: 3, 9: 3, 10: 3, 11: 2, 12: 2})
-
+    assert create_simple.BellmanFord(1) == ({1: 0, 2: 1, 3: 2}, {2: 1, 3: 2})
     with pytest.raises(ValueError):
         create_negative.BellmanFord(1)
