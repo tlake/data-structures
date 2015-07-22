@@ -105,5 +105,5 @@ Contains a Graph class with the following methods:
     * Returns a tuple of dictionaries containing nodes as keys and shortest distances
     as values in the first dictionary and previous nodes as values in the second.
 - g.BellmanFord(start)
-    * Returns the same as dijkstra.  Will raise an value error if any edge contains
-    a negative weight.
+    * Returns the same as dijkstra.  Will raise an value error if there are any
+    negative cycles in the graph.
