@@ -107,3 +107,5 @@ Contains a Graph class with the following methods:
 - g.BellmanFord(start)
     * Returns the same as dijkstra.  Will raise an value error if there are any
     negative cycles in the graph.
+"""Aside---
+    If there are negative weights in the graph, then Dijkstra's Algorithm will not return the correct values. It assumes that it will always take more to travel to the next node. Bellman Ford's Algorithm works just fine for negative values. It can also detect negative cycles and return an error in those cases. Bellman's is slower, but it is more flexible since it can deal with negative weights.
