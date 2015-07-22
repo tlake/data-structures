@@ -131,30 +131,16 @@ class Graph(object):
         while unvisited:
             tmp = []
             for node in unvisited:
-                tmp.append((distances['node'], node))
+                tmp.append((distances[node], node))
             cur = min(tmp)[1]
+            unvisited.remove(cur)
 
-            for neighbor in cur.neighbors():
+            for neighbor in self.neighbors(cur):
                 temp_dist = distances[cur] + self.graph[cur][neighbor]
                 if temp_dist < distances[neighbor]:
                     distances[neighbor] = temp_dist
                     prevs[neighbor] = cur
         return distances, prevs
-
-        # shortest_paths = {}
-        # unvisited = PriorityQueue()
-        # cur = start
-        # for node in self.nodes():
-        #     shortest_paths.update({node: 2000000000})
-        #     unvisited.insert(2000000000, node)
-        # shortest_paths[start] = 0
-        # unvisited.remove(start)
-
-        # neighbors = []
-        # for node in cur.neighbors():
-        #     self.graph[cur][node]
-
-        # print shortest_paths
 
     def BellmanFord(self, start):
         distance = {}
